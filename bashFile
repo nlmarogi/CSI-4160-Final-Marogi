@@ -1,0 +1,7 @@
+#!/bin/bash
+
+#gcloud.sh is a tool to start/stop a VM under the 'name-of-project' in GCP
+#args [start|stop]
+#run by issuing,
+#sh gcloud.sh start
+gcloud compute instances $1 --zone "your-proj-zone" "VM" --project "name-of-project"
