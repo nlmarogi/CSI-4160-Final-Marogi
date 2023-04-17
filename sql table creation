@@ -1,0 +1,10 @@
+sql table commands
+
+CREATE TABLE  `sensehat` (
+  `id` INT primary key, auto incrament, NOT NULL,
+  `timesent` VARCHAR(55),
+  `transmitiontype` VARCHAR(45),
+  `temperature` VARCHAR(30)
+  );
+  
+
