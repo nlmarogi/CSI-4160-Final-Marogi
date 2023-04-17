@@ -1,0 +1,205 @@
+[
+    {
+        "id": "38b8b49c97a6f990",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2e69748517ef2c1a",
+        "type": "debug",
+        "z": "38b8b49c97a6f990",
+        "name": "debug-CSI-14160",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "5eaab61e9f4a22ee",
+        "type": "inject",
+        "z": "38b8b49c97a6f990",
+        "name": "Logical1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 180,
+        "y": 1420,
+        "wires": [
+            [
+                "34a0ba52f9a7bca6",
+                "e8bd523b5df7d174"
+            ]
+        ]
+    },
+    {
+        "id": "34a0ba52f9a7bca6",
+        "type": "rpi-gpio out",
+        "z": "38b8b49c97a6f990",
+        "name": "output 1",
+        "pin": "20",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 500,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "e8bd523b5df7d174",
+        "type": "debug",
+        "z": "38b8b49c97a6f990",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "17a5fb73cefe7d03",
+        "type": "rpi-sensehat in",
+        "z": "38b8b49c97a6f990",
+        "name": "",
+        "motion": false,
+        "env": true,
+        "stick": false,
+        "x": 170,
+        "y": 320,
+        "wires": [
+            [
+                "ce5579f123947e9c"
+            ]
+        ]
+    },
+    {
+        "id": "ce5579f123947e9c",
+        "type": "delay",
+        "z": "38b8b49c97a6f990",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "5",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 320,
+        "y": 280,
+        "wires": [
+            [
+                "ed0fa11df8ef2af9"
+            ]
+        ]
+    },
+    {
+        "id": "794d155fa33fb251",
+        "type": "function",
+        "z": "38b8b49c97a6f990",
+        "name": "function 2",
+        "func": "var tmp = msg.payload.temperature;\nreturn tmp;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 240,
+        "wires": [
+            [
+                "77fd88319aed13d4",
+                "2e69748517ef2c1a"
+            ]
+        ]
+    },
+    {
+        "id": "ed0fa11df8ef2af9",
+        "type": "json",
+        "z": "38b8b49c97a6f990",
+        "name": "data",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 530,
+        "y": 240,
+        "wires": [
+            [
+                "794d155fa33fb251"
+            ]
+        ]
+    },
+    {
+        "id": "77fd88319aed13d4",
+        "type": "csv",
+        "z": "38b8b49c97a6f990",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "temperature",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 690,
+        "y": 320,
+        "wires": [
+            [
+                "1eb278d47317039d"
+            ]
+        ]
+    },
+    {
+        "id": "1eb278d47317039d",
+        "type": "file",
+        "z": "38b8b49c97a6f990",
+        "name": "",
+        "filename": "/home/nlmarogi/Desktop/data - Sheet1.csv",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 850,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    }
+]
